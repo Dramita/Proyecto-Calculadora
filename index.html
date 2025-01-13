@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Sistema de Evaluación de Riesgos</title>
+    <style>
+        body {
+            font-family: Poppins, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container select,
+        .form-container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e0f7fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Sistema de Evaluación de Riesgos</h1>
+    <div class="form-container">
+        <form id="riskForm">
+
+            <!-- Factores de Agente Amenazante -->
+            <h2>Factores de Agente Amenazante</h2>
+            <label for="skill">¿Cuál hábiles técnicamente son los agentes amenazantes?:</label>
+            <select id="skill" name="skill">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Experto en pruebas de penetración</option>
+                <option value="3">Redes y programación</option>
+                <option value="4">Usuario avanzado de computadores</option>
+                <option value="6">Alguna habilidad técnica</option>
+                <option value="9">Ninguna habilidad técnica</option>
+            </select>
+
+            <label for="motivation">¿Cuán motivados están?:</label>
+            <select id="motivation" name="motivation">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Baja o ninguna recompensa</option>
+                <option value="4">Posible recompensa</option>
+                <option value="9">Alta recompensa</option>
+            </select>
+
+            <label for="opportunity">¿Qué recursos y/o acceso tienen al activo con los cuales pudieran explotar la vulnerabilidad?:</label>
+            <select id="opportunity" name="opportunity">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="0">Acceso completo o recursos caros requeridos</option>
+                <option value="4">Acceso o recursos especiales requeridos</option>
+                <option value="7">Algún acceso o recurso requerido</option>
+                <option value="9">Ningún acceso o recurso requerido</option>
+            </select>
+
+            <label for="size">¿Cuán grande es este grupo de agentes amenazantes?:</label>
+            <select id="size" name="size">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="2">Desarrolladores</option>
+                <option value="2">Administradores de sistemas</option>
+                <option value="4">Usuarios de intranet</option>
+                <option value="5">Socios</option>
+                <option value="6">Usuarios autentificados</option>
+                <option value="9">Usuarios de internet anónimos</option>
+            </select>
+
+            <!-- Factores de Vulnerabilidad -->
+            <h2>Factores de Vulnerabilidad</h2>
+            <label for="discoverability">¿Cuán fácil es para los agentes amenazantes el descubrir la vulnerabilidad?:</label>
+            <select id="discoverability" name="discoverability">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Prácticamente imposible</option>
+                <option value="3">Difícil</option>
+                <option value="7">Fácil</option>
+                <option value="9">Existen herramientas automatizadas para hacerlo</option>
+            </select>
+
+            <label for="exploitability">¿Cuán fácil es para los agentes amenazantes el explotar la vulnerabilidad?:</label>
+            <select id="exploitability" name="exploitability">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Teóricamente explotable</option>
+                <option value="3">Difícil</option>
+                <option value="5">Fácil</option>
+                <option value="9">Existen herramientas automatizadas para hacerlo</option>
+            </select>
+
+            <label for="knowledge">¿Cuán conocida es la vulnerabilidad?:</label>
+            <select id="knowledge" name="knowledge">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Desconocido</option>
+                <option value="4">Escondido</option>
+                <option value="6">Obvio</option>
+                <option value="9">De conocimiento público</option>
+            </select>
+
+            <label for="intrusion_detection">¿Cuán probable es que el ataque sea detectado?:</label>
+            <select id="intrusion_detection" name="intrusion_detection">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Detección activa en la aplicación</option>
+                <option value="3">Logueado y revisado</option>
+                <option value="8">Logueado pero sin ser revisado</option>
+                <option value="9">No logueado del todo</option>
+            </select>
+
+            <!-- Factores Técnicos -->
+            <h2>Factores Técnicos</h2>
+            <label for="confidentiality">¿Cuánta información se filtraría y cuán sensible es?:</label>
+            <select id="confidentiality" name="confidentiality">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="2">Filtración menor de datos no sensibles</option>
+                <option value="6">Filtración menor de datos críticos</option>
+                <option value="7">Filtración extensa de datos no sensibles</option>
+                <option value="9">Filtración de todos los datos</option>
+            </select>
+
+            <label for="integrity">¿Cuánta información quedaría dañada y cuán extenso es el daño?:</label>
+            <select id="integrity" name="integrity">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Pocos datos dañados ligeramente</option>
+                <option value="3">Pocos datos dañados seriamente</option>
+                <option value="5">Muchos datos dañados ligeramente</option>
+                <option value="7">Muchos datos dañados seriamente</option>
+                <option value="9">Todos los datos dañados totalmente</option>
+            </select>
+
+            <label for="availability">¿Cuántos servicios estarían interrumpidos y cuán vitales son?:</label>
+            <select id="availability" name="availability">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Pocos servicios secundarios interrumpidos</option>
+                <option value="5">Pocos servicios primarios interrumpidos</option>
+                <option value="5">Muchos servicios secundarios interrumpidos</option>
+                <option value="7">Muchos servicios primarios interrumpidos</option>
+                <option value="9">Todos los servicios completamente interrumpidos</option>
+            </select>
+
+            <label for="responsibility">¿Son las acciones de los agentes amenazantes trazables a uno o varios individuos?:</label>
+            <select id="responsibility" name="responsibility">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Totalmente trazables</option>
+                <option value="7">Posiblemente trazables</option>
+                <option value="9">Completamente anónimos</option>
+            </select>
+
+            <!-- Factores de Negocio -->
+            <h2>Factores de Negocio</h2>
+            <label for="financial_damage">¿Cuál es el daño económico para la empresa, como resultado de un ataque?:</label>
+            <select id="financial_damage" name="financial_damage">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Menor al costo de mitigar la vulnerabilidad</option>
+                <option value="3">Efecto menor en la ganancia monetaria del periodo</option>
+                <option value="7">Efecto significativo en la ganancia monetaria del periodo</option>
+                <option value="9">Bancarrota</option>
+            </select>
+
+            <label for="reputation_damage">¿Podría un ataque resultar en un daño a la reputación que afectara al negocio?:</label>
+            <select id="reputation_damage" name="reputation_damage">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Daño mínimo</option>
+                <option value="4">Pérdida de clientes grandes</option>
+                <option value="5">Caída en la imagen pública</option>
+                <option value="9">Daño a la marca</option>
+            </select>
+
+            <label for="non_compliance">¿Qué tamaño de violación a algún estándar o regulación se produciría como resultado de un ataque?:</label>
+            <select id="non_compliance" name="non_compliance">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="2">Violación menor</option>
+                <option value="5">Violación clara</option>
+                <option value="7">Violación de alto perfil</option>
+            </select>
+
+            <label for="privacy_violation">¿Cuánta información personal (PII) sería revelada?:</label>
+            <select id="privacy_violation" name="privacy_violation">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="1">Información no sensible expuesta</option>
+                <option value="3">Posible filtración de datos sensibles</option>
+                <option value="5">Filtración de datos sensibles</option>
+                <option value="7">Datos de clientes comprometidos</option>
+                <option value="9">Filtración de datos de la empresa entera</option>
+            </select>
+
+            <button type="submit">Calcular Riesgo</button>
+        </form>
+
+        <div id="result" class="result" style="display: none;">
+            <h3>Resultado</h3>
+            <p id="finalRisk"></p>
+            <p id="severity"></p>
+        </div>
+    </div>
+
+    <script>
+        // Código para capturar el formulario y calcular el riesgo
+        document.getElementById("riskForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevenir que el formulario se envíe
+            
+            // Tomar los valores seleccionados
+            const skill = parseInt(document.getElementById("skill").value);
+            const motivation = parseInt(document.getElementById("motivation").value);
+            const opportunity = parseInt(document.getElementById("opportunity").value);
+            const size = parseInt(document.getElementById("size").value);
+
+            const discoverability = parseInt(document.getElementById("discoverability").value);
+            const exploitability = parseInt(document.getElementById("exploitability").value);
+            const knowledge = parseInt(document.getElementById("knowledge").value);
+            const intrusion_detection = parseInt(document.getElementById("intrusion_detection").value);
+
+            const confidentiality = parseInt(document.getElementById("confidentiality").value);
+            const integrity = parseInt(document.getElementById("integrity").value);
+            const availability = parseInt(document.getElementById("availability").value);
+            const responsibility = parseInt(document.getElementById("responsibility").value);
+
+            const financial_damage = parseInt(document.getElementById("financial_damage").value);
+            const reputation_damage = parseInt(document.getElementById("reputation_damage").value);
+            const non_compliance = parseInt(document.getElementById("non_compliance").value);
+            const privacy_violation = parseInt(document.getElementById("privacy_violation").value);
+
+            // Calcular el Total de Posibilidad
+            const total_possibility = (skill + motivation + opportunity + size + discoverability + exploitability + knowledge + intrusion_detection) / 8;
+
+            // Calcular el Total Impacto Técnico
+            const total_technical_impact = (confidentiality + integrity + availability + responsibility) / 4;
+
+            // Calcular el Total Impacto de Negocio
+            const total_business_impact = (financial_damage + reputation_damage + non_compliance + privacy_violation) / 4;
+
+            // Calcular la Severidad del Riesgo
+            const average_impact = (total_technical_impact + total_business_impact) / 2;
+
+            // Determinar Severidad
+            let severity = '';
+            if (total_possibility < 3 && average_impact < 3) {
+                severity = 'Bajo';
+            } else if (total_possibility < 6 && average_impact < 6) {
+                severity = 'Medio';
+            } else {
+                severity = 'Alto';
+            }
+
+            // Mostrar los resultados
+            document.getElementById("finalRisk").innerHTML = `Total de Posibilidad: ${total_possibility.toFixed(2)}<br>Total de Impacto Técnico: ${total_technical_impact.toFixed(2)}<br>Total de Impacto de Negocio: ${total_business_impact.toFixed(2)}`;
+            document.getElementById("severity").innerHTML = `Severidad del Riesgo: ${severity}`;
+            document.getElementById("result").style.display = "block";
+        });
+    </script>
+</body>
+</html>

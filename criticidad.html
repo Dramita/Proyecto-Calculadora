@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Calcular Criticidad</title>
+    <style>
+        body {
+            font-family: Poppins, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container label {
+            font-weight: bold;
+        }
+
+        .form-container select,
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e0f7fa;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Calcular Criticidad Bicevida</h1>
+    <div class="form-container">
+        <form id="criticalityForm">
+
+            <!-- Selección de Criticidad Técnica -->
+        <label for="technical_criticality">Riesgo Técnico:</label>
+        <select id="technical_criticality" name="technical_criticality">
+            <option value="9">Crítica</option>
+            <option value="7">Alta</option>
+            <option value="5">Media</option>
+            <option value="3">Baja</option>
+        </select>
+
+        <!-- Selección de Criticidad de Negocio -->
+        <label for="business_criticality">Riesgo Bicevida:</label>
+        <select id="business_criticality" name="business_criticality">
+            <option value="9">Crítica</option>
+            <option value="7">Alta</option>
+            <option value="5">Media</option>
+            <option value="3">Baja</option>
+        </select>
+
+        
+        <button type="submit">Calcular Promedio de Criticidad</button>
+    </form>
+
+    <!-- Resultados -->
+    <div id="result" class="result" style="display: none;">
+        <h3 id="result-text"></h3>
+    </div>
+</div>
+<!-- Tu código JavaScript al final del archivo criticidad.html -->
+<script>
+    document.getElementById("criticalityForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevenir que el formulario se envíe
+
+        // Obtener los valores seleccionados para la criticidad
+        const technical_criticality = parseInt(document.getElementById("technical_criticality").value);
+        const business_criticality = parseInt(document.getElementById("business_criticality").value);
+
+        // Calcular el promedio de la criticidad técnica y de negocio
+        const average_criticality = (technical_criticality + business_criticality) / 2;
+
+        // Determinar el nivel de criticidad según el promedio
+        let resultText = "";
+        let resultColor = "";
+        
+        if (average_criticality >= 8) {
+            resultText = "Crítico";
+            resultColor = "darkred";  // Rojo oscuro para crítico
+        } else if (average_criticality >= 6) {
+            resultText = "Alto";
+            resultColor = "red";  // Rojo para alto
+        } else if (average_criticality >= 4) {
+            resultText = "Medio";
+            resultColor = "yellow";  // Amarillo para medio
+        } else {
+            resultText = "Bajo";
+            resultColor = "green";  // Verde para bajo
+        }
+
+        // Mostrar el resultado con el color adecuado
+        const resultDiv = document.getElementById("result");
+        const resultTextElement = document.getElementById("result-text");
+
+        resultTextElement.innerText = `${resultText} - Promedio: ${average_criticality.toFixed(2)}`;
+        resultDiv.style.backgroundColor = resultColor; // Cambiar el color de fondo del resultado
+        resultDiv.style.display = "block"; // Mostrar el resultado
+    });
+</script>
+
+</body>
+</html>
